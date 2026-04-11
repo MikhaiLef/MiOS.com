@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiOS — официальный сайт</title>
+    <link rel="icon" href="MiOS_ico.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css">
+    <style>
+        :root {
+            --ms-color-primary: #0078d4;
+            --ms-color-primary-hover: #106ebe;
+            --ms-color-background: #faf9f8;
+            --ms-color-surface: #ffffff;
+            --ms-color-text: #201f1e;
+            --ms-color-text-secondary: #605e5c;
+            --ms-color-border: #e1dfdd;
+            --ms-shadow-small: 0 2px 4px rgba(0,0,0,0.04);
+            --ms-shadow-medium: 0 4px 8px rgba(0,0,0,0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Плавная прокрутка для всего документа */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Inter', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+            background-color: var(--ms-color-background);
+            color: var(--ms-color-text);
+            line-height: 1.5;
+        }
+        
+        /* Header */
+        .ms-header {
+            background-color: var(--ms-color-surface);
+            border-bottom: 1px solid var(--ms-color-border);
+            padding: 0 5%;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--ms-shadow-small);
+        }
+        
+        .ms-logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ms-color-text);
+            letter-spacing: -0.3px;
+            cursor: pointer;
+        }
+        
+        .ms-header-nav {
+            margin-left: 40px;
+            display: flex;
+            gap: 28px;
+            font-size: 14px;
+            color: var(--ms-color-text);
+        }
+        
+        .ms-header-nav a {
+            text-decoration: none;
+            color: var(--ms-color-text);
+            cursor: pointer;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+        
+        .ms-header-nav a:hover {
+            border-bottom-color: var(--ms-color-primary);
+        }
+        
+        /* Main Container */
+        .ms-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 5%;
+        }
+        
+        /* Breadcrumb */
+        .ms-breadcrumb {
+            font-size: 14px;
+            color: var(--ms-color-text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        .ms-breadcrumb span {
+            color: var(--ms-color-primary);
+            cursor: pointer;
+        }
+        
+        .ms-breadcrumb span:hover {
+            text-decoration: underline;
+        }
+        
+        /* Hero Section */
+        .ms-hero {
+            margin-bottom: 40px;
+        }
+        
+        .ms-hero-title {
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--ms-color-text);
+            margin-bottom: 16px;
+        }
+        
+        /* Content Card */
+        .ms-content-card {
+            background: var(--ms-color-surface);
+            border-radius: 4px;
+            padding: 32px;
+            margin: 32px 0;
+            border: 1px solid var(--ms-color-border);
+            box-shadow: var(--ms-shadow-small);
+        }
+        
+        .ms-content-card p {
+            margin-bottom: 16px;
+            font-size: 15px;
+            color: var(--ms-color-text);
+        }
+        
+        .ms-content-card p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .ms-content-card a {
+            color: var(--ms-color-primary);
+            text-decoration: none;
+        }
+        
+        .ms-content-card a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Section Headers */
+        .ms-section-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 48px 0 24px;
+            color: var(--ms-color-text);
+            scroll-margin-top: 70px; /* Чтобы заголовок не перекрывался шапкой при прокрутке */
+        }
+        
+        /* Table стиль для версий */
+        .ms-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--ms-color-surface);
+            border: 1px solid var(--ms-color-border);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--ms-shadow-small);
+        }
+        
+        .ms-table th {
+            text-align: left;
+            padding: 16px 20px;
+            background-color: var(--ms-color-background);
+            border-bottom: 1px solid var(--ms-color-border);
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--ms-color-text-secondary);
+        }
+        
+        .ms-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--ms-color-border);
+            font-size: 15px;
+        }
+        
+        .ms-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .ms-table tr:hover {
+            background-color: #f8f8f8;
+        }
+        
+        .ms-table a {
+            color: var(--ms-color-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .ms-table a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Badge */
+        .ms-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            background-color: #e1dfdd;
+            color: var(--ms-color-text);
+            margin-left: 8px;
+        }
+        
+        .ms-badge-beta {
+            background-color: #ffb900;
+            color: #000;
+        }
+        
+        /* Footer */
+        .ms-footer {
+            background-color: #f2f2f2;
+            padding: 32px 5%;
+            border-top: 1px solid var(--ms-color-border);
+            margin-top: 60px;
+        }
+        
+        .ms-footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .ms-footer-links {
+            display: flex;
+            gap: 24px;
+            font-size: 13px;
+            color: var(--ms-color-text-secondary);
+        }
+        
+        .ms-footer-contact {
+            font-size: 14px;
+            color: var(--ms-color-text);
+        }
+        
+        .ms-footer-contact a {
+            color: var(--ms-color-primary);
+            text-decoration: none;
+        }
+        
+        .ms-footer-contact a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Info Box */
+        .ms-info-box {
+            background-color: #f0f6ff;
+            border-left: 4px solid var(--ms-color-primary);
+            padding: 20px 24px;
+            margin: 24px 0;
+            scroll-margin-top: 70px; /* Для якорной ссылки Документация */
+        }
+        
+        .ms-info-box strong {
+            color: var(--ms-color-text);
+        }
+        
+        /* Developer info */
+        .ms-developer-info {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+        
+        .ms-developer-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .ms-developer-label {
+            font-size: 13px;
+            color: var(--ms-color-text-secondary);
+            margin-bottom: 4px;
+        }
+        
+        .ms-developer-value {
+            font-size: 15px;
+            color: var(--ms-color-text);
+        }
+        
+        .ms-developer-value a {
+            color: var(--ms-color-primary);
+            text-decoration: none;
+        }
+        
+        .ms-developer-value a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ms-header-nav {
+                display: none;
+            }
+            
+            .ms-hero-title {
+                font-size: 36px;
+            }
+            
+            .ms-section-title {
+                font-size: 24px;
+            }
+            
+            .ms-table {
+                font-size: 14px;
+            }
+            
+            .ms-table th,
+            .ms-table td {
+                padding: 12px 16px;
+            }
+            
+            .ms-content-card {
+                padding: 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .ms-container {
+                padding: 24px 16px;
+            }
+            
+            .ms-hero-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="ms-header">
+        <span class="ms-logo-text" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">MiOS</span>
+        <nav class="ms-header-nav">
+            <a href="#main">Главная</a>
+            <a href="#download">Скачать</a>
+            <a href="#documentation">Документация</a>
+            <a href="#source">Исходный код</a>
+            <a href="#archive">Архив</a>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="ms-container">
+        
+        <!-- Якорь для Главной -->
+        <div id="main"></div>
+        
+        <!-- Breadcrumb -->
+        <div class="ms-breadcrumb">
+            <span>Главная</span> / <span>Продукты</span> / <span style="color: var(--ms-color-text); cursor: default;">MiOS</span>
+        </div>
+        
+        <!-- Hero Section -->
+        <div class="ms-hero">
+            <h1 class="ms-hero-title">MiOS System</h1>
+        </div>
+        
+        <!-- Developer Info -->
+        <div class="ms-developer-info">
+            <div class="ms-developer-item">
+                <span class="ms-developer-label">Разработчик</span>
+                <span class="ms-developer-value">Mikhail</span>
+            </div>
+            <div class="ms-developer-item">
+                <span class="ms-developer-label">Сайт автора</span>
+                <span class="ms-developer-value">
+                    <a href="https://mikhailandmz.netlify.app/" target="_blank">mikhailandmz.netlify.app</a>
+                </span>
+            </div>
+            <!-- Якорь для Архива -->
+            <div class="ms-developer-item" id="archive">
+                <span class="ms-developer-label">Архив</span>
+                <span class="ms-developer-value">
+                    <a href="https://mikhailef.github.io/RuArchive.org/" target="_blank">RuArchive.org</a>
+                </span>
+            </div>
+        </div>
+        
+        <!-- Main Description Card -->
+        <div class="ms-content-card">
+            <p><strong>MiOS</strong> — операционная система, написанная на ASM и C. Есть версия на 16 бит и 32 бит.</p>
+            <p>Мы будем открывать исходный код системы, но не сразу и постепенно.</p>
+            <p>MiOS использует разные типы загрузчиков. Есть версия с загрузчиком GRUB, но в основном мы используем свой загрузчик, написанный на ASM (NASM, FASM).</p>
+            <p>Сайт архива (там тоже можно скачать MiOS, а также выкладывать любой контент): 
+                <a href="https://mikhailef.github.io/RuArchive.org/" target="_blank">https://mikhailef.github.io/RuArchive.org/</a>
+            </p>
+        </div>
+        
+        <!-- Documentation Section с якорем -->
+        <div id="documentation" class="ms-info-box">
+            <p><strong>Документация MiOS</strong></p>
+            <p>MiOS — это операционная система, написанная на ASM (FASM, NASM) и C. В последних версиях системы есть полноценная файловая система. В этой документации вы узнаете, какая папка за что отвечает.</p>
+            <p><strong>Папка com</strong> — на данный момент ничего не находится. Эта папка не задействована в системе, так как является бета-корнем (бета-корень — это папка, которая на неопределённый срок не задействована в системе, и её можно спокойно удалить).</p>
+            <p><strong>Папка MiOS</strong> — отвечает за загрузку boot.bin, в котором находится загрузчик системы. Удаление этой папки приведёт к нестабильной работе системы.</p>
+            <p><strong>Папка kernel или com.kernel</strong> — содержит компоненты для запуска и корректной работы ядра системы. Удаление этой папки приведёт к нестабильной работе или полному отказу системы.</p>
+        </div>
+        
+        <!-- Download Versions Section с якорем -->
+        <h2 id="download" class="ms-section-title">Скачать MiOS</h2>
+        
+        <table class="ms-table">
+            <thead>
+                <tr>
+                    <th>Версия</th>
+                    <th>Описание</th>
+                    <th>Скачать</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>MiOS 1.0 beta</strong></td>
+                    <td>Первый публичный beta</td>
+                    <td><a href="MiOS 1.img" target="_blank">MiOS 1.0 beta.iso</a></td>
+                </tr>
+                <tr>
+                    <td><strong>MiOS 2.0 beta</strong></td>
+                    <td>Beta выпуск</td>
+                    <td><a href="MiOS 2.0 beta.iso" target="_blank">MiOS 2.0 beta.iso</a></td>
+                </tr>
+                <tr>
+                    <td><strong>MiOS 3.0 beta</strong></td>
+                    <td>Первая система с x32 ядром</td>
+                    <td><a href="MiOS 3.0 beta.iso" target="_blank">MiOS 3.0 beta.iso</a></td>
+                </tr>
+                <tr>
+                    <td><strong>MiOS 4.0 for GRUB beta</strong></td>
+                    <td>Beta версия с использованием GRUB</td>
+                    <td><a href="MiOS for GRUB beta.iso" target="_blank">MiOS for GRUB beta.iso</a></td>
+                </tr>
+                <tr>
+                    <td><strong>MiOS 4.0 beta 1</strong></td>
+                    <td>Beta 1 с расширенным функционалом</td>
+                    <td><a href="MiOS 4.0 beta 1.iso" target="_blank">MiOS 4.0 beta 1.iso</a></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Source Code Section с якорем -->
+        <h2 id="source" class="ms-section-title">Исходный код MiOS</h2>
+        
+        <table class="ms-table">
+            <thead>
+                <tr>
+                    <th>Версия</th>
+                    <th>Описание</th>
+                    <th>Скачать</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>MiOS 1.0 NASM BETA 1</strong></td>
+                    <td>Исходный код первой beta версии</td>
+                    <td><a href="исходный код MiOS ASM BETA 1.zip" target="_blank">исходный код MiOS ASM BETA 1.zip</a></td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+    
+    <!-- FOOTER -->
+    <footer class="ms-footer">
+        <div class="ms-footer-content">
+            <div class="ms-footer-links">
+                <span>MiOS</span>
+                <span>Документация</span>
+                <span>Исходный код</span>
+                <span>Архив</span>
+                <span>© Mikhail 2026</span>
+            </div>
+            <div class="ms-footer-contact">
+                Обратная связь: <a href="mailto:mikhailofficial2001@gmail.com">mikhailofficial2001@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
