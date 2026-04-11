@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiForum</title>
+    <style>
+        /* ===== RESET & BASE - STRICT SHARP EDGES, NO ROUNDING, NO ICONS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Segoe UI', 'Segoe UI Variable', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+            padding: 32px 24px;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== STRICT SHARP HEADER - NO ROUNDED CORNERS ===== */
+        .forum-header {
+            border-bottom: 3px solid #000000;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .forum-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #000000;
+            border-left: 6px solid #0078D4;
+            padding-left: 18px;
+        }
+
+        .forum-subtitle {
+            font-size: 0.9rem;
+            color: #3a3a3a;
+            font-weight: 500;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .back-link {
+            margin-bottom: 0;
+        }
+
+        .back-link a {
+            color: #0078D4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-bottom: 2px solid transparent;
+            transition: border 0.1s;
+            padding-bottom: 2px;
+        }
+
+        .back-link a:hover {
+            border-bottom: 2px solid #0078D4;
+        }
+
+        /* ===== STRICT SHARP FORMS, NO ROUNDING ===== */
+        .form-section {
+            background: #ffffff;
+            border: 1px solid #000000;
+            padding: 28px 32px;
+            margin-bottom: 44px;
+            box-shadow: none;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+            color: #000000;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #000000;
+            font-family: 'Segoe UI', 'Courier New', monospace;
+            font-size: 0.95rem;
+            background-color: #ffffff;
+            outline: none;
+            border-radius: 0px;
+            transition: 0.05s linear;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #0078D4;
+            background-color: #fafcff;
+            box-shadow: none;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            background: #000000;
+            border: 2px solid #000000;
+            padding: 10px 28px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: white;
+            transition: all 0.1s ease;
+            font-family: 'Segoe UI', system-ui;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 0px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        /* ===== MESSAGES SECTION - SHARP BOXES, NO ROUNDING ===== */
+        .messages-section h3 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 6px solid #000000;
+            padding-left: 18px;
+        }
+
+        #count {
+            background: #e0e4e9;
+            padding: 2px 12px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #000000;
+            border: 1px solid #000000;
+        }
+
+        .messages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .message {
+            background: white;
+            border: 1px solid #000000;
+            padding: 20px 24px;
+            transition: 0.05s linear;
+        }
+
+        .message:hover {
+            background: #fefefe;
+            border-left: 6px solid #0078D4;
+            padding-left: 20px;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #000000;
+        }
+
+        .username {
+            font-weight: 800;
+            color: #0078D4;
+            font-size: 0.9rem;
+            background: #f0f6ff;
+            padding: 4px 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #000000;
+            letter-spacing: 0.3px;
+        }
+
+        .date {
+            font-size: 0.7rem;
+            color: #5a5e66;
+            background: #f2f2f2;
+            padding: 3px 10px;
+            border: 1px solid #cccccc;
+            font-family: monospace;
+        }
+
+        .message-text {
+            line-height: 1.55;
+            font-size: 0.95rem;
+            color: #1a1a1a;
+            word-wrap: break-word;
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+
+        .delete-btn {
+            background: transparent;
+            border: 1px solid #000000;
+            color: #d13438;
+            padding: 6px 16px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-top: 10px;
+            transition: all 0.1s;
+            cursor: pointer;
+            border-radius: 0px;
+            text-transform: uppercase;
+        }
+
+        .delete-btn:hover {
+            background: #fce4e4;
+            border-color: #a80000;
+            color: #a80000;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 56px 24px;
+            color: #3a3a3a;
+            background: #ffffff;
+            border: 1px solid #000000;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* status bar strict */
+        .status-bar {
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 2px solid #000000;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #2e2e2e;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* info & error toasts - sharp edges, no icons */
+        .info, .error {
+            padding: 14px 20px;
+            margin-bottom: 24px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            border-left: 6px solid;
+            border-right: 1px solid #000;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+
+        .info {
+            background: #e6f4ea;
+            border-left-color: #107c10;
+            color: #0a5c0a;
+        }
+
+        .error {
+            background: #fef0f0;
+            border-left-color: #d13438;
+            color: #b91c1c;
+        }
+
+        /* responsive */
+        @media (max-width: 680px) {
+            body {
+                padding: 20px 16px;
+            }
+            .form-section {
+                padding: 20px;
+            }
+            .message {
+                padding: 16px;
+            }
+            .forum-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="forum-header">
+        <div>
+            <div class="forum-title">MiOS Forum / MiForum</div>
+            <div class="forum-subtitle">напишите сообщение!</div>
+        </div>
+    </div>
+    
+    <div id="infoMsg" class="info"></div>
+    <div id="errorMsg" class="error"></div>
+    
+    <div class="form-section">
+        <div class="form-group">
+            <label>ВАШЕ ИМЯ</label>
+            <input type="text" id="username" placeholder="Аноним" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label>СООБЩЕНИЕ</label>
+            <textarea id="message" required placeholder="Напишите что-нибудь..."></textarea>
+        </div>
+        <button id="sendBtn">ОТПРАВИТЬ</button>
+    </div>
+    
+    <div class="messages-section">
+        <h3>ВСЕ СООБЩЕНИЯ <span id="count">0</span></h3>
+        <div id="messagesList">
+            <div style="text-align:center;padding:40px;color:#3a3a3a;border:1px solid #000;">ЗАГРУЗКА...</div>
+        </div>
+    </div>
+    <div class="status-bar">
+        MiOS Forum 2026
+    </div>
+</div>
+
+<script>
+    // ===== ВАШ РАБОЧИЙ URL ИЗ MOCKAPI =====
+    const API_URL = 'https://69da27d226585bd92dd3a309.mockapi.io/mi';
+    // ======================================
+    
+    let currentUser = localStorage.getItem('mios_user');
+    if (!currentUser) {
+        currentUser = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+        localStorage.setItem('mios_user', currentUser);
+    }
+    
+    function showInfo(text) {
+        const div = document.getElementById('infoMsg');
+        div.textContent = text;
+        div.style.display = 'block';
+        setTimeout(() => { div.style.display = 'none'; }, 3000);
+    }
+    
+    function showError(text) {
+        const div = document.getElementById('errorMsg');
+        div.textContent = text;
+        div.style.display = 'block';
+        setTimeout(() => { div.style.display = 'none'; }, 5000);
+    }
+    
+    async function loadMessages() {
+        try {
+            const response = await fetch(API_URL);
+            
+            if (!response.ok) {
+                throw new Error('HTTP ' + response.status);
+            }
+            
+            let messages = await response.json();
+            
+            const messagesList = document.getElementById('messagesList');
+            const countSpan = document.getElementById('count');
+            
+            countSpan.innerText = messages.length;
+            
+            if (messages.length === 0) {
+                messagesList.innerHTML = '<div class="empty">НЕТ СООБЩЕНИЙ. БУДЬТЕ ПЕРВЫМ!</div>';
+                return;
+            }
+            
+            messagesList.innerHTML = [...messages].reverse().map(msg => {
+                const isOwn = (msg.user_id === currentUser);
+                return `
+                    <div class="message">
+                        <div class="message-header">
+                            <span class="username">${escapeHtml(msg.username)}</span>
+                            <span class="date">${escapeHtml(msg.date)}</span>
+                        </div>
+                        <div class="message-text">
+                            ${escapeHtml(msg.message).replace(/\n/g, '<br>')}
+                        </div>
+                        ${isOwn ? `<button class="delete-btn" onclick="deleteMessage('${msg.id}')">УДАЛИТЬ</button>` : ''}
+                    </div>
+                `;
+            }).join('');
+            
+        } catch (error) {
+            console.error('Ошибка:', error);
+            document.getElementById('messagesList').innerHTML = '<div class="empty">ОШИБКА ЗАГРУЗКИ: ' + error.message + '</div>';
+            showError('Ошибка загрузки: ' + error.message);
+        }
+    }
+    
+    async function sendMessage() {
+        const username = document.getElementById('username').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        if (!message) {
+            showError('НАПИШИТЕ СООБЩЕНИЕ!');
+            return;
+        }
+        
+        if (message.length > 5000) {
+            showError('СООБЩЕНИЕ СЛИШКОМ ДЛИННОЕ (МАКСИМУМ 5000 СИМВОЛОВ)');
+            return;
+        }
+        
+        try {
+            const newMessage = {
+                username: username || 'Аноним',
+                message: message,
+                date: new Date().toLocaleString('ru-RU'),
+                user_id: currentUser
+            };
+            
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newMessage)
+            });
+            
+            if (response.ok) {
+                document.getElementById('message').value = '';
+                showInfo('СООБЩЕНИЕ ОТПРАВЛЕНО!');
+                await loadMessages();
+            } else {
+                const error = await response.text();
+                showError('ОШИБКА ПРИ СОХРАНЕНИИ: ' + error);
+            }
+        } catch (error) {
+            showError('ОШИБКА: ' + error.message);
+        }
+    }
+    
+    async function deleteMessage(id) {
+        if (!confirm('УДАЛИТЬ ЭТО СООБЩЕНИЕ?')) return;
+        
+        try {
+            const getResponse = await fetch(`${API_URL}/${id}`);
+            const msg = await getResponse.json();
+            
+            if (msg.user_id === currentUser) {
+                await fetch(`${API_URL}/${id}`, {
+                    method: 'DELETE'
+                });
+                showInfo('СООБЩЕНИЕ УДАЛЕНО!');
+                await loadMessages();
+            } else {
+                showError('НЕЛЬЗЯ УДАЛИТЬ ЧУЖОЕ СООБЩЕНИЕ');
+            }
+        } catch (error) {
+            showError('ОШИБКА: ' + error.message);
+        }
+    }
+    
+    function escapeHtml(text) {
+        if (!text) return '';
+        return text.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    document.getElementById('sendBtn').onclick = sendMessage;
+    window.deleteMessage = deleteMessage;
+    
+    // Загружаем сообщения
+    loadMessages();
+    
+    // Автообновление каждые 10 секунд
+    setInterval(loadMessages, 10000);
+</script>
+</body>
+</html>
