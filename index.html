@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MiOS — официальный сайт</title>
+    <title>MiOS</title>
     <link rel="icon" href="MiOS_ico.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,10 +48,16 @@
             height: 54px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: var(--ms-shadow-small);
+        }
+        
+        .ms-header-left {
+            display: flex;
+            align-items: center;
         }
         
         .ms-logo-text {
@@ -81,6 +87,33 @@
         
         .ms-header-nav a:hover {
             border-bottom-color: var(--ms-color-primary);
+        }
+        
+        /* Кнопка форума в стиле Microsoft */
+        .ms-forum-btn {
+            background-color: transparent;
+            border: 1px solid var(--ms-color-border);
+            border-radius: 4px;
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: inherit;
+            color: var(--ms-color-text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .ms-forum-btn:hover {
+            background-color: #f0f0f0;
+            border-color: var(--ms-color-primary);
+            color: var(--ms-color-primary);
+        }
+        
+        .ms-forum-btn:active {
+            transform: scale(0.98);
         }
         
         /* Main Container */
@@ -331,6 +364,11 @@
             .ms-content-card {
                 padding: 24px;
             }
+            
+            .ms-forum-btn {
+                padding: 4px 12px;
+                font-size: 12px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -348,14 +386,19 @@
 
     <!-- HEADER -->
     <header class="ms-header">
-        <span class="ms-logo-text" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">MiOS</span>
-        <nav class="ms-header-nav">
-            <a href="#main">Главная</a>
-            <a href="#download">Скачать</a>
-            <a href="#documentation">Документация</a>
-            <a href="#source">Исходный код</a>
-            <a href="#archive">Архив</a>
-        </nav>
+        <div class="ms-header-left">
+            <span class="ms-logo-text" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">MiOS</span>
+            <nav class="ms-header-nav">
+                <a href="#main">Главная</a>
+                <a href="#download">Скачать</a>
+                <a href="#documentation">Документация</a>
+                <a href="#source">Исходный код</a>
+                <a href="#archive">Архив</a>
+            </nav>
+        </div>
+        <button class="ms-forum-btn" onclick="window.open('Forum.html', '_blank');">
+             Перейти на форум
+        </button>
     </header>
 
     <!-- MAIN CONTENT -->
